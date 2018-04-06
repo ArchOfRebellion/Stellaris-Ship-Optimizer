@@ -44,7 +44,7 @@ Download the following files:
 
 6. intelligence.csv - this is your intelligence on one or more enemies. Currently has some data on a devouring swarm that was harassing me
 
-7. Optimizer v1 - this folder has the install file for the optimizer. Download and install!
+7. Stellaris Ship Optimizer.exe - the executable optimizer!
 
 8. (Optional) intelligenceBuilder.xlsx - this excel file is the intelligence file as an excel sheet with the permissible values in dropdown menus. Included simply for ease of use. Make sure you save your intelligence as 'intelligence.csv' after you use it.
 
@@ -55,9 +55,7 @@ Download the following files:
 
 2. Update the intelligence.csv to match what you know about your enemies. Use the intelligenceBuilder or refer to the 'permissableValues' for what you should call weapons, defenses, etc. NOTE THAT THE OPTIMIZER IS DUMB, IT CAN ONLY HANDLE ENTRIES THAT ARE EXACT.
 
-3. Install the optimizer
+3. Run the Optimizer! May take a couple of minutes to finish..
 
-4. Run the installer - it will prompt you for the folder with all of the csv files.
-
-5. Check out the results when it finishes!
+4. Check out the results!
 
