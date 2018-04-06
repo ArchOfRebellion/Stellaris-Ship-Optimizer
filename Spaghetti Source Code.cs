@@ -13,17 +13,19 @@ namespace Stellaris_Ship_Optimizer
         [STAThread]
         static void Main(string[] args)
         {
+
             //Get the input folder location
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            string FolderPath = "";
-            if(fbd.ShowDialog() == DialogResult.OK)
-            {
-                FolderPath = fbd.SelectedPath;
-            }
+            //FolderBrowserDialog fbd = new FolderBrowserDialog();
+            string FolderPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            Console.WriteLine(FolderPath);
+            //if(fbd.ShowDialog() == DialogResult.OK)
+            //{
+            //    FolderPath = fbd.SelectedPath;
+            //}
             //Dictionary Counter - This makes sure everything was loaded correctly.. It should eventually be equal to 6
             int DictCounter = 0;
             //Load everything
-            Dictionary<string, weapon> WeaponDictionary = ReadWeaponDictionary(FolderPath + "\\weapons.csv");
+            Dictionary<string, weapon> WeaponDictionary = ReadWeaponDictionary(FolderPath + "\\weapons.csv");            
             if (WeaponDictionary.Count > 0)
             {
                 Console.WriteLine(WeaponDictionary.Count + " Weapons loaded.");
@@ -107,33 +109,29 @@ namespace Stellaris_Ship_Optimizer
                 corvette BestCorvette = ImpOptimizeCorvette(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
                 BestShips.Add(BestCorvette);
                 //BestCorvette.ReadOut();
-                //WriteResults(BestShips, "C:\\Users\\Gray\\Documents\\Stellaris Book\\" + Badguys[0].name + "results-" + BestShips.Last().type + ".csv");
                 if (Tech["Destroyer"] > 0)
                 {
                     
                     destroyer BestDestroyer = ImpOptimizeDestroyer(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
                     //BestDestroyer.ReadOut();
                     BestShips.Add(BestDestroyer);
-                    //WriteResults(BestShips, "C:\\Users\\Gray\\Documents\\Stellaris Book\\" + Badguys[0].name + "results-" + BestShips.Last().type + ".csv");
                 }
                 if (Tech["Cruiser"] > 0)
                 {
                     cruiser BestCruiser = ImpOptimizeCruiser(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
                     //BestCruiser.ReadOut();
                     BestShips.Add(BestCruiser);
-                    //WriteResults(BestShips, "C:\\Users\\Gray\\Documents\\Stellaris Book\\" + Badguys[0].name + "results-" + BestShips.Last().type + ".csv");
                 }
                 if (Tech["Battleship"] > 0)
                 {
                     battleship BestBattleship = ImpOptimizeBattleship(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
                     //BestBattleship.Readout();
                     BestShips.Add(BestBattleship);
-                    //WriteResults(BestShips, "C:\\Users\\Gray\\Documents\\Stellaris Book\\" + Badguys[0].name + "results-" + BestShips.Last().type + ".csv");
                 }
                 platform BestPlatform = ImpOptimizePlatform(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
                 //BestPlatform.ReadOut();
                 BestShips.Add(BestPlatform);
-                WriteResults(BestShips, "C:\\Users\\Gray\\Documents\\Stellaris Book\\" + Badguys[0].name + "results-all.csv");
+                WriteResults(BestShips, FolderPath + "\\" + Badguys[0].name + "results-all.csv");
                 Console.WriteLine();
                 Console.WriteLine("Analysis Complete!!");
                 //Console.WriteLine("Press Any Key to Exit.");
