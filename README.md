@@ -46,12 +46,14 @@ Download the following files:
 
 7. Optimizer v1 - this folder has the install file for the optimizer. Download and install!
 
+8. (Optional) intelligenceBuilder.xlsx - this excel file is the intelligence file as an excel sheet with the permissible values in dropdown menus. Included simply for ease of use. Make sure you save your intelligence as 'intelligence.csv' after you use it.
+
 
 <b>To Run:</b>
 
 1. Update the tech.csv to reflect your techs in game
 
-2. Update the intelligence.csv to match what you know about your enemies. Refer to the 'permissableValues' for what you should call weapons, defenses, etc. NOTE THAT THE OPTIMIZER IS DUMB, IT CAN ONLY HANDLE ENTRIES THAT ARE EXACT.
+2. Update the intelligence.csv to match what you know about your enemies. Use the intelligenceBuilder or refer to the 'permissableValues' for what you should call weapons, defenses, etc. NOTE THAT THE OPTIMIZER IS DUMB, IT CAN ONLY HANDLE ENTRIES THAT ARE EXACT.
 
 3. Install the optimizer
 
