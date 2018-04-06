@@ -1,0 +1,138 @@
+﻿Name,Ship,Slot,Tier,Tech Tree,Cost,Power,Ship Speed Mult,Evasion,Tracking,Sensor Range,Fire Rate Mult,Accuracy,Range Mult
+Fission Reactor,Corvette,Reactor,1,Reactors,20,75,0,0,0,0,0,0,0
+Fusion Reactor,Corvette,Reactor,2,Reactors,25,100,0,0,0,0,0,0,0
+Cold Fusion Reactor,Corvette,Reactor,3,Reactors,30,130,0,0,0,0,0,0,0
+Antimatter Reactor,Corvette,Reactor,4,Reactors,35,170,0,0,0,0,0,0,0
+Zero-point Reactor,Corvette,Reactor,5,Reactors,40,220,0,0,0,0,0,0,0
+Dark Matter Reactor,Corvette,Reactor,1,Enigmatic Power Core,45,285,0,0,0,0,0,0,0
+Fission Reactor,Destroyer,Reactor,1,Reactors,40,140,0,0,0,0,0,0,0
+Fusion Reactor,Destroyer,Reactor,2,Reactors,50,180,0,0,0,0,0,0,0
+Cold Fusion Reactor,Destroyer,Reactor,3,Reactors,60,240,0,0,0,0,0,0,0
+Antimatter Reactor,Destroyer,Reactor,4,Reactors,70,320,0,0,0,0,0,0,0
+Zero-point Reactor,Destroyer,Reactor,5,Reactors,80,430,0,0,0,0,0,0,0
+Dark Matter Reactor,Destroyer,Reactor,6,Enigmatic Power Core,90,550,0,0,0,0,0,0,0
+Fission Reactor,Cruiser,Reactor,1,Reactors,100,280,0,0,0,0,0,0,0
+Fusion Reactor,Cruiser,Reactor,2,Reactors,130,360,0,0,0,0,0,0,0
+Cold Fusion Reactor,Cruiser,Reactor,3,Reactors,160,480,0,0,0,0,0,0,0
+Antimatter Reactor,Cruiser,Reactor,4,Reactors,190,620,0,0,0,0,0,0,0
+Zero-point Reactor,Cruiser,Reactor,5,Reactors,220,800,0,0,0,0,0,0,0
+Dark Matter Reactor,Cruiser,Reactor,6,Enigmatic Power Core,250,1030,0,0,0,0,0,0,0
+Fission Reactor,Battleship,Reactor,1,Reactors,200,550,0,0,0,0,0,0,0
+Fusion Reactor,Battleship,Reactor,2,Reactors,260,720,0,0,0,0,0,0,0
+Cold Fusion Reactor,Battleship,Reactor,3,Reactors,320,950,0,0,0,0,0,0,0
+Antimatter Reactor,Battleship,Reactor,4,Reactors,380,1250,0,0,0,0,0,0,0
+Zero-point Reactor,Battleship,Reactor,5,Reactors,440,1550,0,0,0,0,0,0,0
+Dark Matter Reactor,Battleship,Reactor,6,Enigmatic Power Core,500,2000,0,0,0,0,0,0,0
+Fission Reactor,Titan,Reactor,1,Reactors,400,1100,0,0,0,0,0,0,0
+Fusion Reactor,Titan,Reactor,2,Reactors,450,1450,0,0,0,0,0,0,0
+Cold Fusion Reactor,Titan,Reactor,3,Reactors,500,1900,0,0,0,0,0,0,0
+Antimatter Reactor,Titan,Reactor,4,Reactors,550,2500,0,0,0,0,0,0,0
+Zero-point Reactor,Titan,Reactor,5,Reactors,1054,3200,0,0,0,0,0,0,0
+Dark Matter Reactor,Titan,Reactor,6,Enigmatic Power Core,1370,4200,0,0,0,0,0,0,0
+Power Core,Colossus,Reactor,1,Reactors,0,10000,0,0,0,0,0,0,0
+Power Core,Starbase,Reactor,1,Reactors,0,10000,0,0,0,0,0,0,0
+Fission Reactor,Platform,Reactor,1,Reactors,40,200,0,0,0,0,0,0,0
+Fusion Reactor,Platform,Reactor,2,Reactors,50,260,0,0,0,0,0,0,0
+Cold Fusion Reactor,Platform,Reactor,3,Reactors,60,340,0,0,0,0,0,0,0
+Antimatter Reactor,Platform,Reactor,4,Reactors,70,440,0,0,0,0,0,0,0
+Zero-point Reactor,Platform,Reactor,5,Reactors,80,575,0,0,0,0,0,0,0
+Dark Matter Reactor,Platform,Reactor,6,Enigmatic Power Core,90,750,0,0,0,0,0,0,0
+Chemical Thrusters,Corvette,Thruster,1,Thrusters,3,-10,0,0,0,0,0,0,0
+Ion Thrusters,Corvette,Thruster,2,Thrusters,6,-15,0.2,5,0,0,0,0,0
+Plasma Thrusters,Corvette,Thruster,3,Thrusters,9,-20,0.4,10,0,0,0,0,0
+Impulse Thrusters,Corvette,Thruster,4,Thrusters,12,-25,0.6,15,0,0,0,0,0
+Chemical Thrusters,Destroyer,Thruster,1,Thrusters,3,-20,0,0,0,0,0,0,0
+Ion Thrusters,Destroyer,Thruster,2,Thrusters,6,-30,0.2,5,0,0,0,0,0
+Plasma Thrusters,Destroyer,Thruster,3,Thrusters,9,-40,0.4,10,0,0,0,0,0
+Impulse Thrusters,Destroyer,Thruster,4,Thrusters,12,-50,0.6,15,0,0,0,0,0
+Chemical Thrusters,Cruiser,Thruster,1,Thrusters,3,-40,0,0,0,0,0,0,0
+Ion Thrusters,Cruiser,Thruster,2,Thrusters,6,-60,0.2,5,0,0,0,0,0
+Plasma Thrusters,Cruiser,Thruster,3,Thrusters,9,-80,0.4,10,0,0,0,0,0
+Impulse Thrusters,Cruiser,Thruster,4,Thrusters,12,-100,0.6,15,0,0,0,0,0
+Chemical Thrusters,Battleship,Thruster,1,Thrusters,3,-80,0,0,0,0,0,0,0
+Ion Thrusters,Battleship,Thruster,2,Thrusters,6,-120,0.2,5,0,0,0,0,0
+Plasma Thrusters,Battleship,Thruster,3,Thrusters,9,-160,0.4,10,0,0,0,0,0
+Impulse Thrusters,Battleship,Thruster,4,Thrusters,12,-200,0.6,15,0,0,0,0,0
+Chemical Thrusters,Titan,Thruster,1,Thrusters,3,-160,0,0,0,0,0,0,0
+Ion Thrusters,Titan,Thruster,2,Thrusters,6,-240,0.2,5,0,0,0,0,0
+Plasma Thrusters,Titan,Thruster,3,Thrusters,9,-320,0.4,10,0,0,0,0,0
+Impulse Thrusters,Titan,Thruster,4,Thrusters,12,-400,0.6,15,0,0,0,0,0
+Chemical Thrusters,Colossus,Thruster,1,Thrusters,3,-200,0,0,0,0,0,0,0
+Ion Thrusters,Colossus,Thruster,2,Thrusters,6,-300,0.2,5,0,0,0,0,0
+Plasma Thrusters,Colossus,Thruster,3,Thrusters,9,-400,0.4,10,0,0,0,0,0
+Impulse Thrusters,Colossus,Thruster,4,Thrusters,12,-500,0.6,15,0,0,0,0,0
+Radar System,,Sensor,1,Sensors,2,-5,0,0,0,1,0,0,0
+Gravitic Sensor,,Sensor,2,Sensors,4,-10,0,0,5,2,0,0,0
+Subspace Sensor,,Sensor,3,Sensors,6,-15,0,0,10,3,0,0,0
+Tachyon Sensor,,Sensor,4,Sensors,8,-20,0,0,15,4,0,0,0
+Hyper Drive I,,Hyper Drive,1,Hyper Drives,5,-10,0,0,0,0,0,0,0
+Hyper Drive II,,Hyper Drive,2,Hyper Drives,10,-15,0,0,0,0,0,0,0
+Hyper Drive III,,Hyper Drive,3,Hyper Drives,20,-20,0,0,0,0,0,0,0
+Jump Drive,,Hyper Drive,1,Jump Drives,30,-30,0,0,0,0,0,0,0
+Psi Jump Drive,,Hyper Drive,1,Psi Jump Drives,30,-30,0,0,0,0,0,0,0
+Basic Combat Computer,,Computer,0,Combat Computers,5,-5,0,0,0,0,0,0,0
+Swarm Combat Computer - Basic,Corvette,Computer,1,Combat Computers,10,-10,0,5,0,0,0.05,0,0
+Swarm Combat Computer - Advanced,Corvette,Computer,2,Combat Computers,15,-15,0,10,0,0,0.1,0,0
+Swarm Combat Computer - Sapient,Corvette,Computer,3,Combat Computers,20,-20,0,25,0,0,0.15,0,0
+Swarm Combat Computer - Autonomous,Corvette,Computer,1,Sentient Combat Computers,20,-20,0,25,0,0,0.15,0,0
+Swarm Combat Computer - Precognitive,Corvette,Computer,1,Precognitive Combat Computers,20,-20,0.2,15,0,0,0.15,0,0
+Picket Combat Computer - Basic,Corvette,Computer,1,Combat Computers,10,-10,0,0,10,0,0.05,0,0
+Picket Combat Computer - Advanced,Corvette,Computer,2,Combat Computers,15,-15,0,0,20,0,1,0,0
+Picket Combat Computer - Sapient,Corvette,Computer,3,Combat Computers,20,-20,0,10,30,0,0.15,0,0
+Picket Combat Computer - Autonomous,Corvette,Computer,1,Sentient Combat Computers,20,-20,0,10,30,0,0.15,0,0
+Picket Combat Computer - Precognitive,Corvette,Computer,1,Precognitive Combat Computers,20,-20,0,0,40,0,0.2,0,0
+Picket Combat Computer - Basic,Destroyer,Computer,1,Combat Computers,10,-10,0,0,10,0,0.05,0,0
+Picket Combat Computer - Advanced,Destroyer,Computer,2,Combat Computers,15,-15,0,0,20,0,0.1,0,0
+Picket Combat Computer - Sapient,Destroyer,Computer,3,Combat Computers,20,-20,0,10,30,0,0.15,0,0
+Picket Combat Computer - Autonomous,Destroyer,Computer,1,Sentient Combat Computers,20,-20,0,10,30,0,0.15,0,0
+Picket Combat Computer - Precognitive,Destroyer,Computer,1,Precognitive Combat Computers,20,-20,0,0,40,0,0.2,0,0
+Picket Combat Computer - Basic,Cruiser,Computer,1,Combat Computers,10,-10,0,0,10,0,0.05,0,0
+Picket Combat Computer - Advanced,Cruiser,Computer,2,Combat Computers,15,-15,0,0,20,0,0.1,0,0
+Picket Combat Computer - Sapient,Cruiser,Computer,3,Combat Computers,20,-20,0,10,30,0,0.15,0,0
+Picket Combat Computer - Autonomous,Cruiser,Computer,1,Sentient Combat Computers,20,-20,0,10,30,0,0.15,0,0
+Picket Combat Computer - Precognitive,Cruiser,Computer,1,Precognitive Combat Computers,20,-20,0,0,40,0,0.2,0,0
+Line Combat Computer - Basic,Destroyer,Computer,1,Combat Computers,10,-10,0,0,0,0,0.05,5,0
+Line Combat Computer - Advanced,Destroyer,Computer,2,Combat Computers,15,-15,0,0,0,0,0.1,10,0
+Line Combat Computer - Sapient,Destroyer,Computer,3,Combat Computers,20,-20,0,0,0,0,0.2,20,0
+Line Combat Computer - Autonomous,Destroyer,Computer,1,Sentient Combat Computers,20,-20,0,0,0,0,0.2,20,0
+Line Combat Computer - Precognitive,Destroyer,Computer,1,Precognitive Combat Computers,20,-20,0,0,10,0,0.15,15,0
+Line Combat Computer - Basic,Cruiser,Computer,1,Combat Computers,10,-10,0,0,0,0,0.05,5,0
+Line Combat Computer - Advanced,Cruiser,Computer,2,Combat Computers,15,-15,0,0,0,0,0.1,10,0
+Line Combat Computer - Sapient,Cruiser,Computer,3,Combat Computers,20,-20,0,0,0,0,0.2,20,0
+Line Combat Computer - Autonomous,Cruiser,Computer,1,Sentient Combat Computers,20,-20,0,0,0,0,0.2,20,0
+Line Combat Computer - Precognitive,Cruiser,Computer,1,Precognitive Combat Computers,20,-20,0,0,10,0,0.15,15,0
+Line Combat Computer - Basic,Battleship,Computer,1,Combat Computers,10,-10,0,0,0,0,0.05,5,0
+Line Combat Computer - Advanced,Battleship,Computer,2,Combat Computers,15,-15,0,0,0,0,0.1,10,0
+Line Combat Computer - Sapient,Battleship,Computer,3,Combat Computers,20,-20,0,0,0,0,0.2,20,0
+Line Combat Computer - Autonomous,Battleship,Computer,1,Sentient Combat Computers,20,-20,0,0,0,0,0.2,20,0
+Line Combat Computer - Precognitive,Battleship,Computer,1,Precognitive Combat Computers,20,-20,0,0,10,0,0.15,15,0
+Artillery Combat Computer- Basic,Destroyer,Computer,1,Combat Computers,10,-10,0,0,0,0,0.05,0,0.05
+Artillery Combat Computer- Advanced,Destroyer,Computer,2,Combat Computers,15,-15,0,0,0,0,0.1,0,0.1
+Artillery Combat Computer- Sapient,Destroyer,Computer,3,Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Autonomous,Destroyer,Computer,1,Sentient Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Precognitive,Destroyer,Computer,1,Precognitive Combat Computers,20,-20,0,0,10,0,0.15,0,0.15
+Artillery Combat Computer- Basic,Cruiser,Computer,1,Combat Computers,10,-10,0,0,0,0,0.15,0,0.05
+Artillery Combat Computer- Advanced,Cruiser,Computer,2,Combat Computers,15,-15,0,0,0,0,0.1,0,0.1
+Artillery Combat Computer- Sapient,Cruiser,Computer,3,Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Autonomous,Cruiser,Computer,1,Sentient Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Precognitive,Cruiser,Computer,1,Precognitive Combat Computers,20,-20,0,0,10,0,0.15,0,0.15
+Artillery Combat Computer- Basic,Battleship,Computer,1,Combat Computers,10,-10,0,0,0,0,0.05,0,0.05
+Artillery Combat Computer- Advanced,Battleship,Computer,2,Combat Computers,15,-15,0,0,0,0,0.1,0,0.1
+Artillery Combat Computer- Sapient,Battleship,Computer,3,Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Autonomous,Battleship,Computer,1,Sentient Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Precognitive,Battleship,Computer,1,Precognitive Combat Computers,20,-20,0,0,10,0,0.15,0,0.15
+Artillery Combat Computer- Basic,Titan,Computer,1,Combat Computers,10,-10,0,0,0,0,0.05,0,0.05
+Artillery Combat Computer- Advanced,Titan,Computer,2,Combat Computers,15,-15,0,0,0,0,0.1,0,0.1
+Artillery Combat Computer- Sapient,Titan,Computer,3,Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Autonomous,Titan,Computer,1,Sentient Combat Computers,20,-20,0,0,0,0,0.2,0,0.2
+Artillery Combat Computer- Precognitive,Titan,Computer,1,Precognitive Combat Computers,20,-20,0,0,10,0,0.15,0,0.15
+Platform Combat Computer - Basic,Platform,Computer,1,Combat Computers,10,-10,0,0,5,0,0.05,0,0
+Platform Combat Computer - Advanced,Platform,Computer,2,Combat Computers,15,-15,0,0,10,0,0.1,0,0
+Platform Combat Computer - Sapient,Platform,Computer,3,Combat Computers,20,-20,0,0,15,0,0.15,10,0
+Platform Combat Computer - Autonomous,Platform,Computer,1,Sentient Combat Computers,20,-20,0,0,15,0,0.15,10,0
+Platform Combat Computer - Precognitive,Platform,Computer,1,Precognitive Combat Computers,20,-20,0,0,25,0,0.15,0,0
+No Reactor,,Reactor,0,Armor,0,0,0,0,0,0,0,0,0
+No Thruster,,Thruster,0,Armor,0,0,0,0,0,0,0,0,0
+No Sensors,,Sensor,0,Armor,0,0,0,0,0,0,0,0,0
+No Hyper Drive,,Hyper Drive,0,Armor,0,0,0,0,0,0,0,0,0
+No Computer,,Computer,0,Armor,0,0,0,0,0,0,0,0,0

@@ -1,0 +1,55 @@
+Optimal Ships based on intelligence.
+Ship,Corvette
+Section,Torpedo
+Weapons,Autocannon,Antimatter Missiles,
+Defenses,Durasteel Armor,Durasteel Armor,Durasteel Armor,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Picket Combat Computer - Basic,
+Scores,8.769862,8.592054,55.5625
+Ship,Destroyer
+Section,Artillery
+Weapons,Advanced Railgun,
+Defenses,Durasteel Armor,Advanced Shields,Advanced Shields,Advanced Shields,Advanced Shields,Advanced Shields,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Section,Gunship
+Weapons,Advanced Railgun,
+Defenses,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Scores,38.57686,4.582306,122.0283
+Ship,Cruiser
+Section,Torpedo
+Weapons,Antimatter Missiles,Ion Disruptor,Autocannon,
+Defenses,Durasteel Armor,Durasteel Armor,Advanced Shields,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Section,Broadside
+Weapons,Ion Disruptor,Ion Disruptor,Ion Disruptor,
+Defenses,Advanced Shields,Advanced Shields,Advanced Shields,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Section,Gunship
+Weapons,Autocannon,Autocannon,
+Defenses,Auxiliary Fire Control,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Scores,1080.697,0.6232044,400.7881
+Ship,Battleship
+Section,Artillery
+Weapons,Advanced Railgun,Advanced Railgun,
+Defenses,Durasteel Armor,Durasteel Armor,Advanced Shields,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Section,Artillery
+Weapons,Advanced Railgun,Advanced Railgun,Advanced Railgun,
+Defenses,Advanced Shields,Advanced Shields,Advanced Shields,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Section,Artillery
+Weapons,Advanced Railgun,
+Defenses,Auxiliary Fire Control,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,
+Scores,1738.034,0.5785412,926.8038
+Ship,Platform
+Section,Light
+Weapons,Autocannon,Autocannon,Autocannon,Autocannon,
+Defenses,Durasteel Armor,Durasteel Armor,Advanced Shields,Auxiliary Fire Control,
+Utilities,Subspace Sensor,Hyper Drive III,Platform Combat Computer - Basic,
+Section,Missile
+Weapons,Antimatter Missiles,Antimatter Missiles,
+Defenses,Advanced Shields,Advanced Shields,Advanced Shields,Auxiliary Fire Control,
+Utilities,Subspace Sensor,Hyper Drive III,Platform Combat Computer - Basic,
+Scores,503.0259,1.32243,361.3219

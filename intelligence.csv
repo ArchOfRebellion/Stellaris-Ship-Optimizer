@@ -1,0 +1,14 @@
+﻿Bad Guy,Swarm,,,,,,
+Ship,Corvette,,,,,,
+Weapons,Flak Cannons P,Advanced Railgun S,Xray Laser S,,,,
+Defenses,Advanced Shields S,Advanced Shields S,Plasteel Armor S,Afterburners A,,,
+Utilities,Corvette Antimatter Reactor,Hyper Drive III,Corvette Ion Thrusters,Gravitic Sensor,Corvette Swarm Combat Computer - Basic,,
+Ship,Destroyer,,,,,,
+Weapons,Plasma Accelerator M,Autocannon S,Disruptor S,Plasma Accelerator S,Autocannon S,,
+Defenses,Advanced Shields S,Advanced Shields S,Advanced Shields S,Advanced Shields S,Plasteel Armor S,Plasteel Armor S,Afterburners A
+Utilities,Destroyer Antimatter Reactor,Hyper Drive III,Destroyer Ion Thrusters,Gravitic Sensor,Destroyer Picket Combat Computer - Basic,,
+Ship,Platform,,,,,,
+Weapons,Basic Strike Craft H,Basic Strike Craft H,,,,,
+Defenses,Advanced Shields M,Advanced Shields M,Advanced Shields M,Advanced Shields M,Plasteel Armor M,Plasteel Armor M,Shield Capacitor A
+Utilities,Platform Antimatter Reactor,Gravitic Sensor,Platform Platform Combat Computer - Basic,,,,
+End,,,,,,,
