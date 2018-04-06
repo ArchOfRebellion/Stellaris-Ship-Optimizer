@@ -1,5 +1,20 @@
 # Stellaris-Ship-Optimizer
-This program optimizes a Stellaris ship based on enemy intelligence.
+This program 'optimizes' a Stellaris ship based on enemy intelligence.
+
+Basically, this program pits a ship against the ships of your enemy and calculates:
+a. The time it takes for your ship to kill their ship (Attack score, Lower is better)
+b. The time it takes their ship to kill your ship (Defense Score, Higher is better)
+c. A final score equal to Defense Score / Attack Score. i.e. how many times longer it takes to be killed than to kill
+The optimizer tests all possible combinations of weapons and defenses (without repeating any!) and outputs the best performing ships
+
+The optimizer doesn't consider a few things:
+a. Range, speed, disengagement - scoring assumes both ships start within range of eachother and they fight to the death
+b. Installed combat computer - Since it doesn't consider any of the above, you'll have to choose the appropriate computer based on weapons
+c. Point defense (sorta) - The optimizer has trouble with point defense and strike craft, because of (a).
+
+The optimizer does do some things you can't:
+a. It tracks damage to shield, armor, and hull separately allowing it to better assess the importance of shield and armor penetration or damage multipliers.
+b. Fire rate augmentations are included in all calculations, making auxiliary fire control better than face value
 
 To run this program:
 Download the following files:
