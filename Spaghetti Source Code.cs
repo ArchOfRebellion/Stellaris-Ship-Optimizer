@@ -6,6 +6,35 @@ using System.Windows.Forms;
 using System.Text;
 using System.Threading.Tasks;
 
+//(Modified) MIT License
+
+//Copyright(c) 2018 BananaCzar aka ArchOfRebellion
+
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software and associated documentation files (the "Software"), to deal
+//in the Software without restriction, including without limitation the rights
+//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//copies of the Software, and to permit persons to whom the Software is
+//furnished to do so, subject to the following conditions:
+
+//If we meet someday and you think this project was worth it, you can buy me a
+//beer.
+
+//Obviously, Stellaris is the property of Paradox Plaza. May their copyrights
+//reign supreme over this license and all of their work.
+
+//The above copyright notice and this permission notice shall be included in all
+//copies or substantial portions of the Software.
+
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//SOFTWARE.
+
+
 namespace Stellaris_Ship_Optimizer
 {
     class Program
@@ -134,6 +163,7 @@ namespace Stellaris_Ship_Optimizer
                 WriteResults(BestShips, FolderPath + "\\" + Badguys[0].name + "results-all.csv");
                 Console.WriteLine();
                 Console.WriteLine("Analysis Complete!!");
+                Console.WriteLine("Results written to: " + FolderPath + "\\" + Badguys[0].name + "results-all.csv");
                 //Console.WriteLine("Press Any Key to Exit.");
             }
             else if(DictCounter == 0)
@@ -445,6 +475,7 @@ namespace Stellaris_Ship_Optimizer
                         }
                         output = "Scores," + Ship.score[0] + "," + Ship.score[1] + "," + Ship.score[2];
                         sr.WriteLine(output);
+                        sr.WriteLine();
                     }
                 }
             }
@@ -786,560 +817,6 @@ namespace Stellaris_Ship_Optimizer
             return Tech;
         }
 
-        //Ship optimizer (Obselete)
-        public static corvette OptimizeCorvette(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
-        {
-            corvette Best = new corvette(1);
-            corvette Working = new corvette(1);
-            float[] BestScore = new float[3];
-            //All available slots. Put into list so we can cycle it down in iterator
-            List<Slot> Slots;
-            //List of equipment that can go in each slot
-            List<equipment>[] slotEquip;
-            //Cycling through all of the section options..
-            for(int i = 1; i<4; i++)
-            {
-                Console.WriteLine("Testing corvette hull type: " + i);
-                Working = new corvette(i);
-                Slots = new List<Slot>();
-                //Pull a total list of slots available
-                foreach(section Sect in Working.Sections)
-                {
-                    foreach(WeaponSlot Slot in Sect.WeaponSlots)
-                    {
-                        Slots.Add(Slot);
-                    }
-                    foreach(DefenseSlot Slot in Sect.DefenseSlots)
-                    {
-                        Slots.Add(Slot);
-                    }
-                    foreach(AuxSlot Slot in Sect.AuxSlots)
-                    {
-                        Slots.Add(Slot);
-                    }
-                }
-                //See what fits in each slot
-                slotEquip = new List<equipment>[Slots.Count];
-                for(int k = 0; k < slotEquip.Count(); k++)
-                {
-                    slotEquip[k] = new List<equipment>();
-                }
-                //Cycle through each slot
-                for(int j = 0; j<Slots.Count; j++)
-                {
-                    //then look at the slot type and assign possible equipment to this slot
-                    switch(Slots[j].type)
-                    {
-                        case 'W':
-                        {
-                            foreach(weapon Weapon in availableWeapons)
-                            {
-                                if(Weapon.size == Slots[j].size)
-                                {
-                                    slotEquip[j].Add(Weapon);
-                                }
-                            }
-                            break;
-                        }
-                        case 'D':
-                        {
-                            foreach(defense Defense in availableDefenses)
-                                {
-                                    if(Defense.size == Slots[j].size)
-                                    {
-                                        slotEquip[j].Add(Defense);
-                                    }
-                                }
-                            break;
-                        }
-                        case 'A':
-                        {
-                            foreach(aux Aux in availableAux)
-                                {
-                                    if(Aux.size == Slots[j].size)
-                                    {
-                                        slotEquip[j].Add(Aux);
-                                    }
-                                }
-                            break;
-                        }
-                    }
-                }
-                //Now I have a list of slots and an array of equipment that fits in each slot.
-                //I now want to iterate over that list and check to see if fits are valid and score them.
-                Working = (corvette)Iterator(availableUtilities, slotEquip, Working, BadGuys);
-                if(Working.score[0] > BestScore[0])
-                {
-                    Best = Working;
-                    BestScore = Working.score;
-                    //Console.WriteLine("New Best!");
-                    //Best.ReadOut();
-                }
-            }
-            return Best;
-        }
-        public static destroyer OptimizeDestroyer(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
-        {
-            destroyer Best = new destroyer(1,1);
-            destroyer Working = new destroyer(1,1);
-            float[] BestScore = new float[3];
-            //All available slots. Put into list so we can cycle it down in iterator
-            List<Slot> Slots;
-            //List of equipment that can go in each slot
-            List<equipment>[] slotEquip;
-            //Cycling through all of the section options..
-            for (int i = 1; i < 4; i++)
-            {
-                for (int a = 1; a < 4; a++)
-                { 
-                    Console.WriteLine("Testing destroyer hull type: " + i + ", " + a);
-                    Working = new destroyer(i,a);
-                    Slots = new List<Slot>();
-                    //Pull a total list of slots available
-                    foreach (section Sect in Working.Sections)
-                    {
-                        foreach (WeaponSlot Slot in Sect.WeaponSlots)
-                        {
-                            Slots.Add(Slot);
-                        }
-                        foreach (DefenseSlot Slot in Sect.DefenseSlots)
-                        {
-                            Slots.Add(Slot);
-                        }
-                        foreach (AuxSlot Slot in Sect.AuxSlots)
-                        {
-                            Slots.Add(Slot);
-                        }
-                    }
-                    //See what fits in each slot
-                    slotEquip = new List<equipment>[Slots.Count];
-                    for (int k = 0; k < slotEquip.Count(); k++)
-                    {
-                        slotEquip[k] = new List<equipment>();
-                    }
-                    //Cycle through each slot
-                    for (int j = 0; j < Slots.Count; j++)
-                    {
-                        //then look at the slot type and assign possible equipment to this slot
-                        switch (Slots[j].type)
-                        {
-                            case 'W':
-                                {
-                                    foreach (weapon Weapon in availableWeapons)
-                                    {
-                                        if (Weapon.size == Slots[j].size)
-                                        {
-                                            slotEquip[j].Add(Weapon);
-                                        }
-                                    }
-                                    break;
-                                }
-                            case 'D':
-                                {
-                                    foreach (defense Defense in availableDefenses)
-                                    {
-                                        if (Defense.size == Slots[j].size)
-                                        {
-                                            slotEquip[j].Add(Defense);
-                                        }
-                                    }
-                                    break;
-                                }
-                            case 'A':
-                                {
-                                    foreach (aux Aux in availableAux)
-                                    {
-                                        if (Aux.size == Slots[j].size)
-                                        {
-                                            slotEquip[j].Add(Aux);
-                                        }
-                                    }
-                                    break;
-                                }
-                        }
-                    }
-                    //Now I have a list of slots and an array of equipment that fits in each slot.
-                    //I now want to iterate over that list and check to see if fits are valid and score them.
-                    Working = (destroyer)Iterator(availableUtilities, slotEquip, Working, BadGuys);
-                    if (Working.score[0] > BestScore[0])
-                    {
-                        Best = Working;
-                        BestScore = Working.score;
-                    }
-                }
-            }
-            return Best;
-        }
-        public static cruiser OptimizeCruiser(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
-        {
-            cruiser Best = new cruiser(1, 1, 1);
-            cruiser Working = new cruiser(1, 1, 1);
-            float[] BestScore = new float[3];
-            //All available slots. Put into list so we can cycle it down in iterator
-            List<Slot> Slots;
-            //List of equipment that can go in each slot
-            List<equipment>[] slotEquip;
-            //Cycling through all of the section options..
-            //Remember that, since the value starts at 1, you need to do one more than the options
-            for (int i = 1; i < 4; i++)
-            {
-                for (int a = 1; a < 5; a++)
-                {
-                    for (int b = 1; b < 3; b++)
-                    {
-                        Console.WriteLine("Testing cruiser hull type: " + i + ", " + a + ", " + b);
-                        Working = new cruiser(i, a, b);
-                        Slots = new List<Slot>();
-                        //Pull a total list of slots available
-                        foreach (section Sect in Working.Sections)
-                        {
-                            foreach (WeaponSlot Slot in Sect.WeaponSlots)
-                            {
-                                Slots.Add(Slot);
-                            }
-                            foreach (DefenseSlot Slot in Sect.DefenseSlots)
-                            {
-                                Slots.Add(Slot);
-                            }
-                            foreach (AuxSlot Slot in Sect.AuxSlots)
-                            {
-                                Slots.Add(Slot);
-                            }
-                        }
-                        //See what fits in each slot
-                        slotEquip = new List<equipment>[Slots.Count];
-                        for (int k = 0; k < slotEquip.Count(); k++)
-                        {
-                            slotEquip[k] = new List<equipment>();
-                        }
-                        //Cycle through each slot
-                        for (int j = 0; j < Slots.Count; j++)
-                        {
-                            //then look at the slot type and assign possible equipment to this slot
-                            switch (Slots[j].type)
-                            {
-                                case 'W':
-                                    {
-                                        foreach (weapon Weapon in availableWeapons)
-                                        {
-                                            if (Weapon.size == Slots[j].size)
-                                            {
-                                                slotEquip[j].Add(Weapon);
-                                            }
-                                        }
-                                        break;
-                                    }
-                                case 'D':
-                                    {
-                                        foreach (defense Defense in availableDefenses)
-                                        {
-                                            if (Defense.size == Slots[j].size)
-                                            {
-                                                slotEquip[j].Add(Defense);
-                                            }
-                                        }
-                                        break;
-                                    }
-                                case 'A':
-                                    {
-                                        foreach (aux Aux in availableAux)
-                                        {
-                                            if (Aux.size == Slots[j].size)
-                                            {
-                                                slotEquip[j].Add(Aux);
-                                            }
-                                        }
-                                        break;
-                                    }
-                            }
-                        }
-                        //Now I have a list of slots and an array of equipment that fits in each slot.
-                        //I now want to iterate over that list and check to see if fits are valid and score them.
-                        Working = (cruiser)Iterator(availableUtilities, slotEquip, Working, BadGuys);
-                        if (Working.score[0] > BestScore[0])
-                        {
-                            Best = Working;
-                            BestScore = Working.score;
-                        }
-                    }
-                }
-            }
-            return Best;
-        }
-        public static battleship OptimizeBattleship(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
-        {
-            battleship Best = new battleship(1, 1, 1);
-            battleship Working = new battleship(1, 1, 1);
-            float[] BestScore = new float[3];
-            //All available slots. Put into list so we can cycle it down in iterator
-            List<Slot> Slots;
-            //List of equipment that can go in each slot
-            List<equipment>[] slotEquip;
-            //Cycling through all of the section options..
-            for (int i = 1; i < 5; i++)
-            {
-                for (int a = 1; a < 5; a++)
-                {
-                    for (int b = 1; b < 3; b++)
-                    {
-                        Console.WriteLine("Testing battleship hull type: " + i + ", " + a + ", " + b);
-                        Working = new battleship(i, a, b);
-                        Slots = new List<Slot>();
-                        //Pull a total list of slots available
-                        foreach (section Sect in Working.Sections)
-                        {
-                            foreach (WeaponSlot Slot in Sect.WeaponSlots)
-                            {
-                                Slots.Add(Slot);
-                            }
-                            foreach (DefenseSlot Slot in Sect.DefenseSlots)
-                            {
-                                Slots.Add(Slot);
-                            }
-                            foreach (AuxSlot Slot in Sect.AuxSlots)
-                            {
-                                Slots.Add(Slot);
-                            }
-                        }
-                        //See what fits in each slot
-                        slotEquip = new List<equipment>[Slots.Count];
-                        for (int k = 0; k < slotEquip.Count(); k++)
-                        {
-                            slotEquip[k] = new List<equipment>();
-                        }
-                        //Cycle through each slot
-                        for (int j = 0; j < Slots.Count; j++)
-                        {
-                            //then look at the slot type and assign possible equipment to this slot
-                            switch (Slots[j].type)
-                            {
-                                case 'W':
-                                    {
-                                        foreach (weapon Weapon in availableWeapons)
-                                        {
-                                            if (Weapon.size == Slots[j].size)
-                                            {
-                                                slotEquip[j].Add(Weapon);
-                                            }
-                                        }
-                                        break;
-                                    }
-                                case 'D':
-                                    {
-                                        foreach (defense Defense in availableDefenses)
-                                        {
-                                            if (Defense.size == Slots[j].size)
-                                            {
-                                                slotEquip[j].Add(Defense);
-                                            }
-                                        }
-                                        break;
-                                    }
-                                case 'A':
-                                    {
-                                        foreach (aux Aux in availableAux)
-                                        {
-                                            if (Aux.size == Slots[j].size)
-                                            {
-                                                slotEquip[j].Add(Aux);
-                                            }
-                                        }
-                                        break;
-                                    }
-                            }
-                        }
-                        //Now I have a list of slots and an array of equipment that fits in each slot.
-                        //I now want to iterate over that list and check to see if fits are valid and score them.
-                        Working = (battleship)Iterator(availableUtilities, slotEquip, Working, BadGuys);
-                        if (Working.score[0] > BestScore[0])
-                        {
-                            Best = Working;
-                            BestScore = Working.score;
-                        }
-                    }
-                }
-            }
-            return Best;
-        }
-        public static platform OptimizePlatform(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
-        {
-            platform Best = new platform(1, 1);
-            platform Working = new platform(1, 1);
-            float[] BestScore = new float[3];
-            //All available slots. Put into list so we can cycle it down in iterator
-            List<Slot> Slots;
-            //List of equipment that can go in each slot
-            List<equipment>[] slotEquip;
-            //Cycling through all of the section options..
-            for (int i = 1; i <7; i++)
-            {
-                for (int a = 1; a < 7; a++)
-                {
-                    Console.WriteLine("Testing platform hull type: " + i + ", " + a);
-                    Working = new platform(i, a);
-                    Slots = new List<Slot>();
-                    //Pull a total list of slots available
-                    foreach (section Sect in Working.Sections)
-                    {
-                        foreach (WeaponSlot Slot in Sect.WeaponSlots)
-                        {
-                            Slots.Add(Slot);
-                        }
-                        foreach (DefenseSlot Slot in Sect.DefenseSlots)
-                        {
-                            Slots.Add(Slot);
-                        }
-                        foreach (AuxSlot Slot in Sect.AuxSlots)
-                        {
-                            Slots.Add(Slot);
-                        }
-                    }
-                    //See what fits in each slot
-                    slotEquip = new List<equipment>[Slots.Count];
-                    for (int k = 0; k < slotEquip.Count(); k++)
-                    {
-                        slotEquip[k] = new List<equipment>();
-                    }
-                    //Cycle through each slot
-                    for (int j = 0; j < Slots.Count; j++)
-                    {
-                        //then look at the slot type and assign possible equipment to this slot
-                        switch (Slots[j].type)
-                        {
-                            case 'W':
-                                {
-                                    foreach (weapon Weapon in availableWeapons)
-                                    {
-                                        if (Weapon.size == Slots[j].size)
-                                        {
-                                            slotEquip[j].Add(Weapon);
-                                        }
-                                    }
-                                    break;
-                                }
-                            case 'D':
-                                {
-                                    foreach (defense Defense in availableDefenses)
-                                    {
-                                        if (Defense.size == Slots[j].size)
-                                        {
-                                            slotEquip[j].Add(Defense);
-                                        }
-                                    }
-                                    break;
-                                }
-                            case 'A':
-                                {
-                                    foreach (aux Aux in availableAux)
-                                    {
-                                        if (Aux.size == Slots[j].size)
-                                        {
-                                            slotEquip[j].Add(Aux);
-                                        }
-                                    }
-                                    break;
-                                }
-                        }
-                    }
-                    //Now I have a list of slots and an array of equipment that fits in each slot.
-                    //I now want to iterate over that list and check to see if fits are valid and score them.
-                    Working = (platform)Iterator(availableUtilities, slotEquip, Working, BadGuys);
-                    if (Working.score[0] > BestScore[0])
-                    {
-                        Best = Working;
-                        BestScore = Working.score;
-                    }
-                }
-            }
-            return Best;
-        }
-        public static titan OptimizeTitan(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
-        {
-            titan Best = new titan();
-            titan Working = new titan();
-            float[] BestScore = new float[3];
-            //All available slots. Put into list so we can cycle it down in iterator
-            List<Slot> Slots;
-            //List of equipment that can go in each slot
-            List<equipment>[] slotEquip;
-            //Cycling through all of the section options..
-            Console.WriteLine("Testing titan hull...");
-            Working = new titan();
-            Slots = new List<Slot>();
-            //Pull a total list of slots available
-            foreach (section Sect in Working.Sections)
-            {
-                foreach (WeaponSlot Slot in Sect.WeaponSlots)
-                {
-                    Slots.Add(Slot);
-                }
-                foreach (DefenseSlot Slot in Sect.DefenseSlots)
-                {
-                    Slots.Add(Slot);
-                }
-                foreach (AuxSlot Slot in Sect.AuxSlots)
-                {
-                    Slots.Add(Slot);
-                }
-            }
-            //See what fits in each slot
-            slotEquip = new List<equipment>[Slots.Count];
-            for (int k = 0; k < slotEquip.Count(); k++)
-            {
-                slotEquip[k] = new List<equipment>();
-            }
-            //Cycle through each slot
-            for (int j = 0; j < Slots.Count; j++)
-            {
-                //then look at the slot type and assign possible equipment to this slot
-                switch (Slots[j].type)
-                {
-                    case 'W':
-                        {
-                            foreach (weapon Weapon in availableWeapons)
-                            {
-                                if (Weapon.size == Slots[j].size)
-                                {
-                                    slotEquip[j].Add(Weapon);
-                                }
-                            }
-                            break;
-                        }
-                    case 'D':
-                        {
-                            foreach (defense Defense in availableDefenses)
-                            {
-                                if (Defense.size == Slots[j].size)
-                                {
-                                    slotEquip[j].Add(Defense);
-                                }
-                            }
-                            break;
-                        }
-                    case 'A':
-                        {
-                            foreach (aux Aux in availableAux)
-                            {
-                                if (Aux.size == Slots[j].size)
-                                {
-                                    slotEquip[j].Add(Aux);
-                                }
-                            }
-                            break;
-                        }
-                }
-            }
-            //Now I have a list of slots and an array of equipment that fits in each slot.
-            //I now want to iterate over that list and check to see if fits are valid and score them.
-            Working = (titan)Iterator(availableUtilities, slotEquip, Working, BadGuys);
-            if (Working.score[0] > BestScore[0])
-            {
-                Best = Working;
-                BestScore = Working.score;
-            }
-            return Best;
-        }
-
         //Improved optimizers
         public static corvette ImpOptimizeCorvette(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
         {
@@ -1468,7 +945,7 @@ namespace Stellaris_Ship_Optimizer
             //Cycling through all of the section options..
             for (int i = 1; i < 7; i++)
             {
-                for (int a = 1; a < 7; a++)
+                for (int a = i; a < 7; a++)
                 {
                     Console.WriteLine("Testing platform hull type: " + i + ", " + a);
                     Working = new platform(i, a);
@@ -1924,87 +1401,6 @@ namespace Stellaris_Ship_Optimizer
             }
             return Best;
         }
-        //Comparer is separated for hot path
-        public static bool compare(HashSet<equipment[]> HashedList, equipment[] Equipment)
-        {
-            bool compared = !HashedList.Any(p => p.SequenceEqual(Equipment));
-            return compared;
-        }
-        //Iterator
-        public static ship Iterator(List<utility> Utilities, List<equipment>[] slotEquip, ship Type,List<BadGuy> Badguys)
-        {
-            ship Best = newCopy(Type);
-            float[] BestScore;
-            if (Best.isValid())
-            {
-                BestScore = Score(Best, Badguys);
-            }
-            else
-            {
-                BestScore = new float[] { -10000f, -10000f, -10000f };
-            }
-            ship Working = newCopy(Type);
-            float[] WorkingScore = new float[3];
-            int[] equipArray = new int[slotEquip.Count()];
-            int[] equipMax = new int[slotEquip.Count()];
-            equipment[] SelectedEquipment;
-            List<equipment[]> Tested = new List<equipment[]>();
-            HashSet<equipment[]> HashedTested = new HashSet<equipment[]>();
-            int counter = 0;
-            int maximum = 1;
-            int avoided = 0;
-            for (int i = 0; i<equipMax.Count(); i++)
-            {
-                equipMax[i] = slotEquip[i].Count();
-                maximum = maximum * equipMax[i];
-            }
-            Console.WriteLine(maximum + " possible combinations.");
-            int Tenper = (int)Math.Floor(maximum / 10d);
-            while (equipArray[0] < equipMax[0])
-            {
-                Working = newCopy(Type);
-                WorkingScore = new float[3];
-                SelectedEquipment = new equipment[slotEquip.Count()];
-                SelectedEquipment = Select(slotEquip, equipArray);
-                Array.Sort(SelectedEquipment, delegate (equipment equip1, equipment equip2) {
-                    return equip1.name.CompareTo(equip2.name); });
-                if(HashedTested.Count()==0)
-                {
-                    Tested.Add(SelectedEquipment);
-                    HashedTested = new HashSet<equipment[]>(Tested);
-                }
-                else
-                {
-                    if(compare(HashedTested,SelectedEquipment))
-                    {
-                        //Tested.Add(SelectedEquipment);
-                        //HashedTested = new HashSet<equipment[]>(Tested);
-                        HashedTested.Add(SelectedEquipment);
-                        Working.AddLoadout(SelectedEquipment, Utilities);
-                        WorkingScore = Score(Working, Badguys);
-                        //Console.WriteLine("Best score: " + BestScore[0] + ", working score: " + WorkingScore[0] + " Best power: " + Best.power);
-                        if (WorkingScore[0] > BestScore[0])
-                        {
-                            Best = Working;
-                            BestScore = WorkingScore;
-                        }
-                    }
-                    else
-                    {
-                        avoided++;
-                    }
-                }
-                AddOne(equipArray, equipMax);
-                counter++;
-                if(counter%Tenper == 0)
-                {
-                    Console.WriteLine((counter / Tenper) * 10 + " % ");
-                }
-            }
-            Console.WriteLine(avoided + " tests avoided.");
-            Best.score = BestScore;
-            return Best;
-        }
 
         //Improved iterator that makes use of the enumerator GetPermutations()
         // Utilities = list of utilities I can use
@@ -2046,13 +1442,9 @@ namespace Stellaris_Ship_Optimizer
             {
                 Working = newCopy(Type);
                 WorkingScore = new float[3];
-
-                //THESE TWO LINES ARE SCREWED UP
                 //They need to make selected equipment the actual equipment
                 SelectedEquipment = new equipment[] { };
                 SelectedEquipment = Select(SlotTypes, equipArray);
-                //YOU CHANGED THEM TO JUNK SO THEY WOULD COMPILE
-
                 Working.AddLoadout(SelectedEquipment, Utilities);
                 WorkingScore = Score(Working, Badguys);
                 //Console.WriteLine("Best score: " + BestScore[0] + ", working score: " + WorkingScore[0] + " Best power: " + Best.power);
@@ -3476,7 +2868,7 @@ namespace Stellaris_Ship_Optimizer
                     {
                         //Artillery
                         sectionName[0] = "Artillery";
-                        Sections.Add(new section(new char[] { 'L' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'L' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[0];
                         break;
                     }
@@ -3484,7 +2876,7 @@ namespace Stellaris_Ship_Optimizer
                     {
                         //Broadside
                         sectionName[0] = "Broadside";
-                        Sections.Add(new section(new char[] { 'M', 'M' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'M', 'M' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[0];
                         break;
                     }
@@ -3492,7 +2884,7 @@ namespace Stellaris_Ship_Optimizer
                     {
                         //Torpedo
                         sectionName[0] = "Torpedo";
-                        Sections.Add(new section(new char[] { 'G', 'S', 'S' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'G', 'S', 'S' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[0];
                         break;
                     }
@@ -3501,7 +2893,7 @@ namespace Stellaris_Ship_Optimizer
                         Console.WriteLine("I could not understand bow section input of " + BowSection + " so I gave this cruiser a Broadside bow");
                         sectionName[0] = "Broadside";
                         sectionType[0] = 2;
-                        Sections.Add(new section(new char[] { 'M', 'M' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'M', 'M' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[0];
                         break;
                     }
@@ -3512,7 +2904,7 @@ namespace Stellaris_Ship_Optimizer
                     {
                         //Artillery
                         sectionName[1] = "Artillery";
-                        Sections.Add(new section(new char[] { 'M', 'L' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'M', 'L' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[1];
                         break;
                     }
@@ -3520,7 +2912,7 @@ namespace Stellaris_Ship_Optimizer
                     {
                         //Broadside
                         sectionName[1] = "Broadside";
-                        Sections.Add(new section(new char[] { 'M', 'M', 'M' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'M', 'M', 'M' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[1];
                         break;
                     }
@@ -3528,7 +2920,7 @@ namespace Stellaris_Ship_Optimizer
                     {
                         //Hangar
                         sectionName[1] = "Hangar";
-                        Sections.Add(new section(new char[] { 'P', 'P', 'H' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'P', 'P', 'H' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[1];
                         break;
                     }
@@ -3536,7 +2928,7 @@ namespace Stellaris_Ship_Optimizer
                     {
                         //Torpedo
                         sectionName[1] = "Torpedo";
-                        Sections.Add(new section(new char[] { 'S', 'S', 'G' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'S', 'S', 'G' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[1];
                         break;
                     }
@@ -3545,7 +2937,7 @@ namespace Stellaris_Ship_Optimizer
                         Console.WriteLine("I could not understand the core section input of " + CoreSection + " I gave this cruiser a Broadside core.");
                         sectionName[1] = "Broadside";
                         sectionType[1] = 2;
-                        Sections.Add(new section(new char[] { 'M', 'M', 'M' }, new char[] { 'M', 'M', 'M' }));
+                        Sections.Add(new section(new char[] { 'M', 'M', 'M' }, new char[] { 'M', 'M', 'M', 'M' }));
                         Sections.Last().name = sectionName[1];
                         break;
                     }
