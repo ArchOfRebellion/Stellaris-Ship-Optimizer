@@ -59,3 +59,7 @@ Download the following files:
 
 4. Check out the results!
 
+Update, April 7th, 2018:
+
+1. Better optimized platforms (it doesn't check whether light section, medium section is better than medium section, light section anymore)
+2. Added a license so y'all know how you can use my code. I'm serious about that beer, though.
