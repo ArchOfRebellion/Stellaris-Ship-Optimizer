@@ -34,12 +34,25 @@ using System.Threading.Tasks;
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
+    //Since last update:
+    //Added titans as possibility
+    //Added hull upgrades, allowing better comparison between ship classes
+    //Added intelligence weights, allowing better optimization against fleets (optional)
+    //Fixed a bug where reactors were not being written to output file
+    //Fixed a bug where other ship's auxiliary defenses would be added to new ships
+    //Utilities are now written at the end of each ship, instead of at the end of each section
+    //Added guardian & crisis support for intelligence - note that changes were made to weapons.csv , utilities.csv , and defenses.csv
+    
+    //Still to add:
+    //Difficulty scaler
+    //Improve missile defense
+
 
 namespace Stellaris_Ship_Optimizer
 {
     class Program
-    {    
-        [STAThread]
+    {
+        private static Dictionary<string, int> Tech;
         static void Main(string[] args)
         {
 
@@ -84,7 +97,7 @@ namespace Stellaris_Ship_Optimizer
                 Console.WriteLine("Intelligence loaded. I've got data on " + Badguys.Count + " enemies.");
                 DictCounter++;
             }
-            Dictionary<string, int> Tech = LoadTech(FolderPath + "\\tech.csv");
+            Tech = LoadTech(FolderPath + "\\tech.csv");
             if (Tech.Count > 0)
             {
                 Console.WriteLine("Tech loaded. I've got data on " + Tech.Count + " technologies.");
@@ -99,7 +112,7 @@ namespace Stellaris_Ship_Optimizer
                 //Load weapons
                 foreach (var Weapon in WeaponDictionary)
                 {
-                    if (Tech[Weapon.Value.tech_tree] == Weapon.Value.tier)
+                    if (Tech.ContainsKey(Weapon.Value.tech_tree) && Tech[Weapon.Value.tech_tree] == Weapon.Value.tier)
                     {
                         AvailableWeapons.Add(Weapon.Value);
                         //Console.WriteLine(Weapon.Value.name + " is available.");
@@ -108,7 +121,7 @@ namespace Stellaris_Ship_Optimizer
                 //Load defenses
                 foreach (var Defense in DefenseDictionary)
                 {
-                    if (Tech[Defense.Value.tech_tree] == Defense.Value.tier)
+                    if (Tech.ContainsKey(Defense.Value.tech_tree) && Tech[Defense.Value.tech_tree] == Defense.Value.tier)
                     {
                         AvailableDefenses.Add(Defense.Value);
                         //Console.WriteLine(Defense.Value.name + " is available.");
@@ -117,7 +130,7 @@ namespace Stellaris_Ship_Optimizer
                 //Load auxiliaries
                 foreach (var Aux in AuxiliaryDictionary)
                 {
-                    if (Tech[Aux.Value.tech_tree] == Aux.Value.tier)
+                    if (Tech.ContainsKey(Aux.Value.tech_tree) && Tech[Aux.Value.tech_tree] == Aux.Value.tier)
                     {
                         AvailableAuxiliary.Add(Aux.Value);
                         //Console.WriteLine(Aux.Value.name + " is available.");
@@ -127,7 +140,7 @@ namespace Stellaris_Ship_Optimizer
                 foreach (var Utility in UtilityDictionary)
                 {
                     //Note that this only checks if it is equal, thereby pulling only the best equipment
-                    if (Tech[Utility.Value.tech_tree] == Utility.Value.tier)
+                    if (Tech.ContainsKey(Utility.Value.tech_tree) && Tech[Utility.Value.tech_tree] == Utility.Value.tier)
                     {
                         AvailableUtilities.Add(Utility.Value);
                         //Console.WriteLine(Utility.Value.name + " is available.");
@@ -135,9 +148,12 @@ namespace Stellaris_Ship_Optimizer
                 }
                 //Optimize best versions
                 List<ship> BestShips = new List<ship>();
-                corvette BestCorvette = ImpOptimizeCorvette(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
-                BestShips.Add(BestCorvette);
-                //BestCorvette.ReadOut();
+                if (Tech["Corvette"] > 0)
+                {
+                    corvette BestCorvette = ImpOptimizeCorvette(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
+                    BestShips.Add(BestCorvette);
+                    //BestCorvette.ReadOut();
+                }
                 if (Tech["Destroyer"] > 0)
                 {
                     
@@ -157,9 +173,18 @@ namespace Stellaris_Ship_Optimizer
                     //BestBattleship.Readout();
                     BestShips.Add(BestBattleship);
                 }
-                platform BestPlatform = ImpOptimizePlatform(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
-                //BestPlatform.ReadOut();
-                BestShips.Add(BestPlatform);
+                if (Tech["Platform"] > 0)
+                {
+                    platform BestPlatform = ImpOptimizePlatform(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
+                    //BestPlatform.ReadOut();
+                    BestShips.Add(BestPlatform);
+                }
+                if(Tech["Titan"] > 0)
+                {
+                    titan BestTitan = ImpOptimizeTitan(AvailableWeapons, AvailableDefenses, AvailableAuxiliary, AvailableUtilities, Badguys);
+                    //BestTitan.Readou();
+                    BestShips.Add(BestTitan);
+                }
                 WriteResults(BestShips, FolderPath + "\\" + Badguys[0].name + "results-all.csv");
                 Console.WriteLine();
                 Console.WriteLine("Analysis Complete!!");
@@ -450,29 +475,35 @@ namespace Stellaris_Ship_Optimizer
                                 output += Slot.auxiliary.name + ",";
                             }
                             sr.WriteLine(output);
-                            output = "Utilities,";
-                            try
-                            {
-                                output += Ship.thrusters.name + ",";
-                            }
-                            catch { }
-                            try
-                            {
-                                output += Ship.sensors.name + ",";
-                            }
-                            catch { }
-                            try
-                            {
-                                output += Ship.hyper_drive.name + ",";
-                            }
-                            catch { }
-                            try
-                            {
-                                output += Ship.combat_computer.name + ",";
-                            }
-                            catch { }
-                            sr.WriteLine(output);
                         }
+                        
+                        output = "Utilities,";
+                        try
+                        {
+                            output += Ship.thrusters.name + ",";
+                        }
+                        catch { }
+                        try
+                        {
+                            output += Ship.sensors.name + ",";
+                        }
+                        catch { }
+                        try
+                        {
+                            output += Ship.hyper_drive.name + ",";
+                        }
+                        catch { }
+                        try
+                        {
+                            output += Ship.combat_computer.name + ",";
+                        }
+                        catch { }
+                        try
+                        {
+                            output += Ship.reactor.name + ",";
+                        }
+                        catch { }
+                        sr.WriteLine(output);
                         output = "Scores," + Ship.score[0] + "," + Ship.score[1] + "," + Ship.score[2];
                         sr.WriteLine(output);
                         sr.WriteLine();
@@ -516,7 +547,7 @@ namespace Stellaris_Ship_Optimizer
         //Performance[2] is the Defense score, defined as the number of time units required for their ship to kill mine
         public static float[] ShipPerformance(ship MyShip, ship TheirShip)
         {
-            float[] Performance = new float[3];
+            float[] Performance = new float[3] { 0, 0, 0 };
             if (MyShip.isValid())
             {
                 //Calculate Attack
@@ -670,6 +701,7 @@ namespace Stellaris_Ship_Optimizer
             List<defense> shipDefenses = new List<defense>();
             List<aux> shipAux = new List<aux>();
             List<utility> shipUtilities = new List<utility>();
+            float shipWeight=1;
             try
             {
                 using (StreamReader sr = new StreamReader(FilePath))
@@ -681,12 +713,14 @@ namespace Stellaris_Ship_Optimizer
                         if((splitInput[0] == "Bad Guy" || splitInput[0] == "Ship" || splitInput[0] == "End") && shipType != "")
                         {
                             //Console.WriteLine("Making a " + shipType + " ship! It will have " + shipWeapons.Count() + " weapons and " + shipDefenses.Count() + " defense and all of " + shipUtilities.Count() + " utilities.");
-                            Badguys.Last().Ships.Add(new EnemyShip(shipType, shipWeapons, shipDefenses, shipAux, shipUtilities));
+                            Badguys.Last().Ships.Add(new EnemyShip(shipType, shipWeapons, shipDefenses, shipAux, shipUtilities,shipWeight));
                             //Console.WriteLine("Ship made.");
                             shipType = "";
                             shipWeapons = new List<weapon>();
                             shipDefenses = new List<defense>();
                             shipUtilities = new List<utility>();
+                            shipAux = new List<aux>();
+                            shipWeight = 1;
                             
                         }
                         switch(splitInput[0])
@@ -701,6 +735,11 @@ namespace Stellaris_Ship_Optimizer
                                 {
                                     shipType = splitInput[1];
                                     //Console.WriteLine("Ship type is now: " + shipType);
+                                    break;
+                                }
+                            case "Weight":
+                                {
+                                    shipWeight = float.Parse(splitInput[1]);
                                     break;
                                 }
                             case "Weapons":
@@ -1401,6 +1440,116 @@ namespace Stellaris_Ship_Optimizer
             }
             return Best;
         }
+        public static titan ImpOptimizeTitan(List<weapon> availableWeapons, List<defense> availableDefenses, List<aux> availableAux, List<utility> availableUtilities, List<BadGuy> BadGuys)
+        {
+            titan Best = new titan();
+            titan Working = new titan();
+            float[] BestScore = new float[3];
+            //All available slots. Put into list so we can cycle it down in iterator
+            List<Slot> Slots;
+            //All available slots put into the SlotType list for cycling with enumerator
+            List<SlotType> SlotTypes;
+            //List of equipment that can go in each slot
+            List<equipment>[] slotEquip;
+            //Cycling through all of the section options..
+            Console.WriteLine("Testing titan hull type.");
+            Working = new titan();
+            Slots = new List<Slot>();
+            SlotTypes = new List<SlotType>();
+            //Pull a total list of slots available, putting them into the respective slot types
+            foreach (section Sect in Working.Sections)
+            {
+                foreach (WeaponSlot Slot in Sect.WeaponSlots)
+                {
+                    if (SlotTypes.Any(p => p.type == 'W' && p.size == Slot.size))
+                    {
+                        SlotTypes.Find(p => p.type == 'W' && p.size == Slot.size).number++;
+                    }
+                    else
+                    {
+                        SlotTypes.Add(new SlotType(Slot.size, 'W', 1));
+                    }
+                    //Slots.Add(Slot);
+                }
+                foreach (DefenseSlot Slot in Sect.DefenseSlots)
+                {
+                    if (SlotTypes.Any(p => p.type == 'D' && p.size == Slot.size))
+                    {
+                        SlotTypes.Find(p => p.type == 'D' && p.size == Slot.size).number++;
+                    }
+                    else
+                    {
+                        SlotTypes.Add(new SlotType(Slot.size, 'D', 1));
+                    }
+                    //Slots.Add(Slot);
+                }
+                foreach (AuxSlot Slot in Sect.AuxSlots)
+                {
+                    if (SlotTypes.Any(p => p.type == 'A' && p.size == Slot.size))
+                    {
+                        SlotTypes.Find(p => p.type == 'A' && p.size == Slot.size).number++;
+                    }
+                    else
+                    {
+                        SlotTypes.Add(new SlotType(Slot.size, 'A', 1));
+                    }
+                    //Slots.Add(Slot);
+                }
+            }
+            //See what fits in each slot
+            slotEquip = new List<equipment>[Slots.Count];
+            //Cycle through each slot
+            foreach (SlotType Type in SlotTypes)
+            {
+                //then look at the slot type and assign possible equipment to this slot
+                switch (Type.type)
+                {
+                    case 'W':
+                        {
+                            foreach (weapon Weapon in availableWeapons)
+                            {
+                                if (Weapon.size == Type.size)
+                                {
+                                    Type.equipment.Add(Weapon);
+                                }
+                            }
+                            break;
+                        }
+                    case 'D':
+                        {
+                            foreach (defense Defense in availableDefenses)
+                            {
+                                if (Defense.size == Type.size)
+                                {
+                                    Type.equipment.Add(Defense);
+                                }
+                            }
+                            break;
+                        }
+                    case 'A':
+                        {
+                            foreach (aux Aux in availableAux)
+                            {
+                                if (Aux.size == Type.size)
+                                {
+                                    Type.equipment.Add(Aux);
+                                }
+                            }
+                            break;
+                        }
+                }
+            }
+            SlotTypes[2].GenerateCombinations();
+            //Now I have a list of slots and an array of equipment that fits in each slot.
+            //I now want to iterate over that list and check to see if fits are valid and score them.
+            Working = (titan)Iterator2(availableUtilities, SlotTypes, Working, BadGuys);
+            if (Working.score[0] > BestScore[0])
+            {
+                Best = Working;
+                BestScore = Working.score;
+            }
+            return Best;
+        }
 
         //Improved iterator that makes use of the enumerator GetPermutations()
         // Utilities = list of utilities I can use
@@ -1467,35 +1616,55 @@ namespace Stellaris_Ship_Optimizer
         public static ship newCopy(ship Ship)
         {
             ship newCopy;
+            int hullLevel = Tech[Ship.type + " Hull"];
+            if(hullLevel < 0)
+            {
+                hullLevel = 0;
+            }
+            else if(hullLevel > 2)
+            {
+                hullLevel = 2;
+            }
             switch (Ship.type)
             {
                 case "Corvette":
                     {
+                        //Corvettes get +100 hull per excess tech level
                         newCopy = new corvette(Ship.sectionType);
+                        newCopy.base_hull += (hullLevel * 100);
                         break;
                     }
                 case "Destroyer":
                     {
+                        //Destroyers get +200 hull per excess tech level
                         newCopy = new destroyer(Ship.sectionType);
+                        newCopy.base_hull += (hullLevel * 200);
                         break;
                     }
                 case "Cruiser":
                     {
+                        //Cruisers get +400 hull per excess tech level
                         newCopy = new cruiser(Ship.sectionType);
+                        newCopy.base_hull += (hullLevel * 400);
                         break;
                     }
                 case "Battleship":
                     {
+                        //Battleships get +800 hull per excess tech level
                         newCopy = new battleship(Ship.sectionType);
+                        newCopy.base_hull += (hullLevel * 800);
                         break;
                     }
                 case "Titan":
                     {
+                        //Titans get +2000 per excess tech level
                         newCopy = new titan();
+                        newCopy.base_hull += (hullLevel * 2000);
                         break;
                     }
                 case "Platform":
                     {
+                        //Platforms don't get any extra
                         newCopy = new platform(Ship.sectionType);
                         break;
                     }
@@ -1580,7 +1749,7 @@ namespace Stellaris_Ship_Optimizer
         {
             float[] AverageScore = new float[3];
             float[] Holder = new float[3];
-            int ShipsChecked = 0;
+            float ShipsChecked = 0;
             bool valid = Ship.isValid();
             if (valid)
             {
@@ -1590,10 +1759,10 @@ namespace Stellaris_Ship_Optimizer
                     foreach (ship BadShip in Baddie.Ships)
                     {
                         Holder = ShipPerformance(Ship, BadShip);
-                        AverageScore[0] += Holder[0];
-                        AverageScore[1] += Holder[1];
-                        AverageScore[2] += Holder[2];
-                        ShipsChecked++;
+                        AverageScore[0] += Holder[0] * BadShip.weight;
+                        AverageScore[1] += Holder[1] * BadShip.weight;
+                        AverageScore[2] += Holder[2] * BadShip.weight;
+                        ShipsChecked += BadShip.weight;
                     }
                 }
                 AverageScore[0] = AverageScore[0] / ShipsChecked;
@@ -1967,6 +2136,8 @@ namespace Stellaris_Ship_Optimizer
         public utility combat_computer;
         //Score
         public float[] score;
+        //Weight is used for enemy ships, if you want to vary the likelihood of each ship appearing
+        public float weight;
 
         //Baseline stats
         public int base_hull;
@@ -1976,6 +2147,10 @@ namespace Stellaris_Ship_Optimizer
         public int base_cost;
         public int base_speed;
         public int sensor_range;
+        //These base multipliers come up for guardians (leviathan expansion)
+        public float base_range_mult;
+        public float base_shield_mult;
+        public float base_damage_mult;
 
         //Actual stats
         public int hull;
@@ -2033,12 +2208,33 @@ namespace Stellaris_Ship_Optimizer
             hull_regen = 0f;
             armor_regen = 0f;
             shield_regen = 0f;
-            shield_mult = 1f;
+            if (base_shield_mult > 0)
+            {
+                shield_mult = 1f + base_shield_mult;
+            }
+            else
+            {
+                shield_mult = 1f;
+            }
             accuracy_mod = 0;
             tracking_mod = 0;
             fire_rate_mult = 0f;
-            range_mult = 1f;
-            damage_mult = 1f;
+            if (base_range_mult > 0)
+            {
+                range_mult = 1f + base_range_mult;
+            }
+            else
+            {
+                range_mult = 1f;
+            }
+            if (base_damage_mult > 0)
+            {
+                damage_mult = 1f + base_damage_mult;
+            }
+            else
+            {
+                damage_mult = 1f;
+            }
             //for each of the sections on the ship,
 
             foreach(section Sect in Sections)
@@ -2132,9 +2328,12 @@ namespace Stellaris_Ship_Optimizer
             //Console.WriteLine(excessMult);
             exess_power_bonus = 0.1f * excessMult;
             //Console.WriteLine("Excess Power Bonus: " + exess_power_bonus);
-            speed_mult += exess_power_bonus;
-            evasion_mult += exess_power_bonus;
-            damage_mult += exess_power_bonus;
+            if (exess_power_bonus > 0)
+            {
+                speed_mult += exess_power_bonus;
+                evasion_mult += exess_power_bonus;
+                damage_mult += exess_power_bonus;
+            }
             speed = (int)(speed * speed_mult);
             shield = (int)(shield * shield_mult);
             evasion = (int)(evasion * evasion_mult);
@@ -2519,6 +2718,7 @@ namespace Stellaris_Ship_Optimizer
         //Tell me what you have
         public void ReadOut()
         {
+            UpdateStats();
             Console.WriteLine("Hello! I am a " + type);
             Console.Write("My weapons are: ");
             foreach(section Sect in Sections)
@@ -2553,6 +2753,7 @@ namespace Stellaris_Ship_Optimizer
     {
         public EnemyShip(string Type, List<weapon> Weapons, List<defense> Defenses, List<aux> Auxes, List<utility> Utilities)
         {
+            weight = 1f;
             switch (Type)
             {
                 case "Corvette":
@@ -2621,9 +2822,242 @@ namespace Stellaris_Ship_Optimizer
                         base_shield = 0;
                         break;
                     }
+                    //Guardians / Leviathans
+                case "Ether Drake":
+                    {
+                        type = "Ether Drake";
+                        base_hull = 150000;
+                        base_cost = 0;
+                        base_evasion = 0.25f;
+                        base_speed = 160;
+                        base_armor = 100000;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Dimensional Horror":
+                    {
+                        type = "Dimensional Horror";
+                        base_hull = 100000;
+                        base_cost = 0;
+                        base_evasion = -0.01f;
+                        base_speed = 0;
+                        base_armor = 100000;
+                        base_shield = 100000;
+                        base_range_mult = 0.5f;
+                        break;
+                    }
+                case "Stellarite Devourer":
+                    {
+                        type = "Stellarite Devourer";
+                        base_hull = 200000;
+                        base_cost = 0;
+                        base_evasion = 0.30f;
+                        base_speed = 30;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Automated Dreadnought":
+                    {
+                        type = "Automated Dreadnought";
+                        base_hull = 10000;
+                        base_cost = 0;
+                        base_evasion = 0.02f;
+                        base_speed = 80;
+                        base_armor = 5000;
+                        base_shield = 0;
+                        base_damage_mult = 2;
+                        base_shield_mult = 3;
+                        break;
+                    }
+                case "Technosphere":
+                    {
+                        type = "Technosphere";
+                        base_hull = 50000;
+                        base_cost = 0;
+                        base_evasion = 0.35f;
+                        base_speed = 80;
+                        base_armor = 20000;
+                        base_shield = 0;
+                        break;
+                    }
+                    //Enigmatic fortressm
+                case "Ancient Vault":
+                    {
+                        //Uses 11_guardians station_xl
+                        type = "Ancient Vault";
+                        base_hull = 50000;
+                        base_cost = 0;
+                        base_evasion = -0.01f;
+                        base_speed = 0;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Ancient Guardian":
+                    {
+                        //Uses 11_guardians station_l
+                        type = "Ancient Guardian";
+                        base_hull = 20000;
+                        base_cost = 0;
+                        base_evasion = -0.01f;
+                        base_speed = 0;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Ancient Warden":
+                    {
+                        //Uses 11_guardians station_m
+                        type = "Ancient Warden";
+                        base_hull = 10000;
+                        base_cost = 0;
+                        base_evasion = -0.01f;
+                        base_speed = 0;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Ancient Defender":
+                    {
+                        //Uses 11_guardians station_s
+                        type = "Ancient Defender";
+                        base_hull = 5000;
+                        base_cost = 0;
+                        base_evasion = -0.01f;
+                        base_speed = 0;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Ancient Sentinel":
+                    {
+                        //Uses 11_guardians station_xs
+                        type = "Ancient Sentinel";
+                        base_hull = 2500;
+                        base_cost = 0;
+                        base_evasion = -0.01f;
+                        base_speed = 0;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                    //Extradimensional crisis event
+                case "Extradimensional Large":
+                    {
+                        type = "Extradimensional Large";
+                        base_hull = 3000;
+                        base_cost = 0;
+                        base_evasion = 0.15f;
+                        base_speed = 100;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Extradimensional Medium":
+                    {
+                        type = "Extradimensional Medium";
+                        base_hull = 1500;
+                        base_cost = 0;
+                        base_evasion = 0.25f;
+                        base_speed = 120;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Extradimensional Small":
+                    {
+                        type = "Extradimensional Small";
+                        base_hull = 750;
+                        base_cost = 0;
+                        base_evasion = 0.2f;
+                        base_speed = 140;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                //Swarm crisis event
+                case "Swarm Warrior": //Swarm large
+                    {
+                        type = "Swarm Warrior";
+                        base_hull = 2000;
+                        base_cost = 0;
+                        base_evasion = 0.05f;
+                        base_speed = 100;
+                        base_armor = 3000;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Swarm Brood Mother": //Carrier
+                    {
+                        type = "Swarm Brood Mother";
+                        base_hull = 2000;
+                        base_cost = 0;
+                        base_evasion = 0.05f;
+                        base_speed = 100;
+                        base_armor = 3000;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Swarm Small":
+                    {
+                        type = "Swarm Small";
+                        base_hull = 500;
+                        base_cost = 0;
+                        base_evasion = 0.65f;
+                        base_speed = 140;
+                        base_armor = 1000;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Swarm Queen":
+                    {
+                        type = "Swarm Queen";
+                        base_hull = 4000;
+                        base_cost = 0;
+                        base_evasion = 0.05f;
+                        base_speed = 100;
+                        base_armor = 6000;
+                        base_shield = 0;
+                        break;
+                    }
+                case "Swarm Sentinel":
+                    {
+                        type = "Swarm Sentinel";
+                        base_hull = 20000;
+                        base_cost = 0;
+                        base_evasion = 0.00f;
+                        base_speed = 0;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                //AI crisis event
+                case "AI Large":
+                    {
+                        type = "AI Large";
+                        base_hull = 2000;
+                        base_cost = 0;
+                        base_evasion = 0.10f;
+                        base_speed = 100;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
+                case "AI Small":
+                    {
+                        type = "AI Small";
+                        base_hull = 800;
+                        base_cost = 0;
+                        base_evasion = 0.25f;
+                        base_speed = 120;
+                        base_armor = 0;
+                        base_shield = 0;
+                        break;
+                    }
                 default:
                     {
-                        Console.WriteLine("I don't know what type this ship is so I made it a battleship.");
+                        Console.WriteLine("I don't know what type of ship a " + Type + " is so I made it a battleship.");
                         type = "Battleship";
                         base_hull = 3000;
                         base_cost = 450;
@@ -2673,6 +3107,14 @@ namespace Stellaris_Ship_Optimizer
             {
                 this.AddDefense(Auxiliary);
             }
+            //if(Type == "Ether Drake")
+            //{
+            //    ReadOut();
+            //}
+        }
+        public EnemyShip(string Type, List<weapon> Weapons, List<defense> Defenses, List<aux> Auxes, List<utility> Utilities, float _weight) : this(Type,Weapons,Defenses,Auxes,Utilities)
+        {
+            weight = _weight;
         }
     }
 
