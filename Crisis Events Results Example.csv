@@ -1,0 +1,67 @@
+Optimal Ships based on intelligence.
+Ship,Corvette
+Section,Torpedo
+Weapons,Xray Laser,Space Torpedos,
+Defenses,Durasteel Armor,Advanced Shields,Advanced Shields,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Picket Combat Computer - Basic,Antimatter Reactor,
+Scores,4.196893,30.12576,127.6568
+
+Ship,Destroyer
+Section,Artillery
+Weapons,Xray Laser,
+Defenses,Durasteel Armor,Durasteel Armor,Durasteel Armor,Durasteel Armor,Advanced Shields,Advanced Shields,
+Section,Gunship
+Weapons,Xray Laser,
+Defenses,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,Antimatter Reactor,
+Scores,17.25164,25.9029,238.8391
+
+Ship,Cruiser
+Section,Artillery
+Weapons,Xray Laser,
+Defenses,Durasteel Armor,Durasteel Armor,Durasteel Armor,Durasteel Armor,
+Section,Artillery
+Weapons,Xray Laser,Xray Laser,
+Defenses,Durasteel Armor,Durasteel Armor,Durasteel Armor,Advanced Shields,
+Section,Broadside
+Weapons,Xray Laser,
+Defenses,Auxiliary Fire Control,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,Antimatter Reactor,
+Scores,174.6049,5.335633,574.7551
+
+Ship,Battleship
+Section,Artillery
+Weapons,Xray Laser,Xray Laser,
+Defenses,Durasteel Armor,Durasteel Armor,Durasteel Armor,
+Section,Artillery
+Weapons,Xray Laser,Xray Laser,Xray Laser,
+Defenses,Durasteel Armor,Durasteel Armor,Advanced Shields,
+Section,Artillery
+Weapons,Xray Laser,
+Defenses,Auxiliary Fire Control,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,Antimatter Reactor,
+Scores,655.9064,2.768571,1138.33
+
+Ship,Platform
+Section,Missile
+Weapons,Antimatter Missiles,Space Torpedos,
+Defenses,Durasteel Armor,Durasteel Armor,Advanced Shields,Auxiliary Fire Control,
+Section,Missile
+Weapons,Space Torpedos,Space Torpedos,
+Defenses,Advanced Shields,Advanced Shields,Advanced Shields,Auxiliary Fire Control,
+Utilities,Subspace Sensor,Hyper Drive III,Platform Combat Computer - Basic,Antimatter Reactor,
+Scores,20.49525,4.961941,55.96307
+
+Ship,Titan
+Section,Titan Bow
+Weapons,Perdition Beam Ion,
+Defenses,Durasteel Armor,Durasteel Armor,Durasteel Armor,Durasteel Armor,Durasteel Armor,Durasteel Armor,
+Section,Titan Core
+Weapons,Xray Laser,Xray Laser,Xray Laser,Xray Laser,
+Defenses,Advanced Shields,Advanced Shields,Advanced Shields,Advanced Shields,Advanced Shields,Advanced Shields,
+Section,Titan Stern
+Weapons,Xray Laser,Xray Laser,Xray Laser,
+Defenses,Auxiliary Fire Control,Auxiliary Fire Control,Auxiliary Fire Control,
+Utilities,Plasma Thrusters,Subspace Sensor,Hyper Drive III,Artillery Combat Computer- Basic,Antimatter Reactor,
+Scores,3459.968,0.54892,1318.597
+
