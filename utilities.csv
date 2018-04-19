@@ -61,16 +61,48 @@ Chemical Thrusters,Colossus,Thruster,1,Thrusters,3,-200,0,0,0,0,0,0,0
 Ion Thrusters,Colossus,Thruster,2,Thrusters,6,-300,0.2,5,0,0,0,0,0
 Plasma Thrusters,Colossus,Thruster,3,Thrusters,9,-400,0.4,10,0,0,0,0,0
 Impulse Thrusters,Colossus,Thruster,4,Thrusters,12,-500,0.6,15,0,0,0,0,0
+Bio Thrusters,,Thruster,1,Bio Utilities,0,0,0,0,0,0,0,0,0
+Ship Thrusters 1,,Thruster,1,Bio Utilities,0,0,0,0,0,0,0,0,0
+Ship Thrusters 2,,Thruster,1,Bio Utilities,0,0,0.2,5,0,0,0,0,0
+Ship Thrusters 3,,Thruster,1,Bio Utilities,0,0,0.4,10,0,0,0,0,0
+Ship Thrusters 4,,Thruster,1,Bio Utilities,0,0,0.6,15,0,0,0,0,0
 Radar System,,Sensor,1,Sensors,2,-5,0,0,0,1,0,0,0
 Gravitic Sensor,,Sensor,2,Sensors,4,-10,0,0,5,2,0,0,0
 Subspace Sensor,,Sensor,3,Sensors,6,-15,0,0,10,3,0,0,0
 Tachyon Sensor,,Sensor,4,Sensors,8,-20,0,0,15,4,0,0,0
+Bio Sensor,,Sensor,1,Bio Utilities,0,0,0,0,0,0,0,0,0
 Hyper Drive I,,Hyper Drive,1,Hyper Drives,5,-10,0,0,0,0,0,0,0
 Hyper Drive II,,Hyper Drive,2,Hyper Drives,10,-15,0,0,0,0,0,0,0
 Hyper Drive III,,Hyper Drive,3,Hyper Drives,20,-20,0,0,0,0,0,0,0
 Jump Drive,,Hyper Drive,1,Jump Drives,30,-30,0,0,0,0,0,0,0
 Psi Jump Drive,,Hyper Drive,1,Psi Jump Drives,30,-30,0,0,0,0,0,0,0
+Bio Drive,,Hyper Drive,1,Bio Utilities,0,0,0,0,0,0,0,0,0
 Basic Combat Computer,,Computer,0,Combat Computers,5,-5,0,0,0,0,0,0,0
+Basic Swarm Combat Computer,,Computer,1,Bio Utilities,0,0,0,5,0,0,0.05,0,0
+Advanced Swarm Combat Computer,,Computer,1,Bio Utilities,0,0,0,10,0,0,0.1,0,0
+Sapient Swarm Combat Computer,,Computer,1,Bio Utilities,0,0,0,25,0,0,0.15,0,0
+Autonomous Swarm Combat Computer,,Computer,1,Bio Utilities,0,0,0,25,0,0,0.15,0,0
+Precognitive Swarm Combat Computer,,Computer,1,Bio Utilities,0,0,0.2,15,0,0,0.15,0,0
+Basic Picket Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,10,0,0.05,0,0
+Advanced Picket Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,20,0,1,0,0
+Sapient Picket Combat Computer,,Computer,1,Bio Utilities,0,0,0,10,30,0,0.15,0,0
+Autonomous Picket Combat Computer,,Computer,1,Bio Utilities,0,0,0,10,30,0,0.15,0,0
+Precognitive Picket Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,40,0,0.2,0,0
+Basic Line Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.05,5,0
+Advanced Line Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.1,10,0
+Sapient Line Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.2,20,0
+Autonomous Line Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.2,20,0
+Precognitive Line Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,10,0,0.15,15,0
+Basic Artillery Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.05,0,0.05
+Advanced Artillery Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.1,0,0.1
+Sapient Artillery Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.2,0,0.2
+Autonomous Artillery Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,0,0,0.2,0,0.2
+Precognitive Artillery Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,10,0,0.15,0,0.15
+Basic Platform Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,5,0,0.05,0,0
+Advanced Platform Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,10,0,0.1,0,0
+Sapient Platform Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,15,0,0.15,10,0
+Autonomous Platform Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,15,0,0.15,10,0
+Precognitive Platform Combat Computer,,Computer,1,Bio Utilities,0,0,0,0,25,0,0.15,0,0
 Swarm Combat Computer - Basic,Corvette,Computer,1,Combat Computers,10,-10,0,5,0,0,0.05,0,0
 Swarm Combat Computer - Advanced,Corvette,Computer,2,Combat Computers,15,-15,0,10,0,0,0.1,0,0
 Swarm Combat Computer - Sapient,Corvette,Computer,3,Combat Computers,20,-20,0,25,0,0,0.15,0,0
