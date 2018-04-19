@@ -63,3 +63,13 @@ Update, April 7th, 2018:
 
 1. Better optimized platforms (it doesn't check whether light section, medium section is better than medium section, light section anymore)
 2. Added a license so y'all know how you can use my code. I'm serious about that beer, though.
+
+Update, April 19th, 2018:
+1. Added titans
+2. Added a way to not do corvettes and platforms
+3. Added hull upgrades, allowing better comparison between ship types
+4. Added intelligence weights for better optimization against fleets
+5. Fixed a bug where it wouldn't include reactors on output
+6. Fixed a bug where it would assign other ship's auxiliary defenses to new ships
+7. Utilities are now written at the end of a ship output, instead of at the end of each section
+8. Added support to guardian and crisis intelligence
